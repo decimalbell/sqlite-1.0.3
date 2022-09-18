@@ -26,9 +26,10 @@
 **   http://www.hwaci.com/drh/
 */
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h> /* exit */
 
 extern void qsort();
 extern double strtod();
@@ -89,7 +90,7 @@ void Configlist_eat(/* struct config * */);
 void Configlist_reset(/* void */);
 
 /********* From the file "error.h" ***************************************/
-void ErrorMsg( /* char *, int, char *, ... */ );
+void ErrorMsg(char *name, ...);
 
 /****** From the file "option.h" ******************************************/
 struct s_options {
@@ -1108,8 +1109,7 @@ int max;
 #define ERRMSGSIZE  10000 /* Hope this is big enough.  No way to error check */
 #define LINEWIDTH      79 /* Max width of any output line */
 #define PREFIXLIMIT    30 /* Max width of the prefix on each line */
-void ErrorMsg(va_alist)
-va_dcl
+void ErrorMsg(char *name, ...)
 {
   char *filename;
   int lineno;
@@ -1122,7 +1122,7 @@ va_dcl
   va_list ap;
   int end, restart, base;
 
-  va_start(ap);
+  va_start(ap, name);
   filename = va_arg(ap,char*);
   lineno = va_arg(ap,int);
   format = va_arg(ap,char*);
