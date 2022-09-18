@@ -29,6 +29,7 @@
 ** $Id: main.c,v 1.18 2000/08/22 13:40:51 drh Exp $
 */
 #include "sqliteInt.h"
+#include <unistd.h>
 
 /*
 ** This is the callback routine for the code that initializes the

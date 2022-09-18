@@ -28,6 +28,8 @@
 */
 #include "sqliteInt.h"
 
+extern void sqliteVdbeCompressSpace(Vdbe *p, int addr);
+
 /*
 ** Allocate a new Select structure and return a pointer to that
 ** structure.

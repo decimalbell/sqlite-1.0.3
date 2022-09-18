@@ -37,7 +37,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 #else
-# define readline getline
+# define readline get_line
 # define add_history(X) 
 #endif
 
@@ -50,7 +50,7 @@
 ** The interface is like "readline" but no command-line editing
 ** is done.
 */
-static char *getline(char *zPrompt){
+static char *get_line(char *zPrompt){
   char *zLine;
   int nLine;
   int n;
@@ -95,7 +95,7 @@ static char *getline(char *zPrompt){
 ** Retrieve a single line of input text.  "isatty" is true if text
 ** is coming from a terminal.  In that case, we issue a prompt and
 ** attempt to use "readline" for command-line editing.  If "isatty"
-** is false, use "getline" instead of "readline" and issue to prompt.
+** is false, use "get_line" instead of "readline" and issue to prompt.
 **
 ** zPrior is a string of prior text retrieved.  If not the empty
 ** string, then issue a continuation prompt.
@@ -104,7 +104,7 @@ static char *one_input_line(const char *zPrior, int isatty){
   char *zPrompt;
   char *zResult;
   if( !isatty ){
-    return getline(0);
+    return get_line(0);
   }
   if( zPrior && zPrior[0] ){
     zPrompt = "   ...> ";
